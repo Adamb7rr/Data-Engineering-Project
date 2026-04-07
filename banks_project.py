@@ -22,14 +22,7 @@ query_statements = [
 logfile = 'code_log.txt'
 output_csv_path = 'Largest_banks_data.csv'
 
-# Code for ETL operations on Country-GDP data
-
-# Importing the required libraries
-
 def log_progress(message):
-    ''' This function logs the mentioned message of a given stage of the
-    code execution to a log file. Function returns nothing'''
-
     timestamp_format = '%Y-%h-%d-%H:%M:%S'
     now = datetime.now()
     timestamp = now.strftime(timestamp_format)
@@ -65,9 +58,6 @@ def extract(url, table_attribs):
 
 def transform(df, exchange_rate_path):
     csvfile = pd.read_csv(exchange_rate_path)
-
-    # i made here the content for currenct is the keys and the content of 
-    # the rate is the values to the crossponding keys
     dict = csvfile.set_index('Currency').to_dict()['Rate']
     df['MC_GBP_Billion'] = [np.round(x * dict['GBP'],2) for x in df['MC_USD_Billion']]
     df['MC_INR_Billion'] = [np.round(x * dict['INR'],2) for x in df['MC_USD_Billion']]
@@ -86,9 +76,6 @@ def run_query(query_statements, sql_connection):
         print(query)
         print(pd.read_sql(query, sql_connection), '\n')
 
-''' Here, you define the required entities and call the relevant
-functions in the correct order to complete the project. Note that this
-portion is not inside any function.'''
 
 log_progress('Preliminaries complete. Initiating ETL process.')
 
