@@ -8,7 +8,6 @@ import sqlite3
 
 url = 'https://web.archive.org/web/20230908091635/https://en.wikipedia.org/wiki/List_of_largest_banks'
 exchange_rate_path = 'exchange_rate.csv'
-
 table_attribs = ['Name', 'MC_USD_Billion']
 db_name = 'Banks.db'
 table_name = 'Largest_banks'
@@ -18,7 +17,6 @@ query_statements = [
         'SELECT AVG(MC_GBP_Billion) FROM Largest_banks',
         'SELECT Name from Largest_banks LIMIT 5'
     ]
-
 logfile = 'code_log.txt'
 output_csv_path = 'Largest_banks_data.csv'
 
